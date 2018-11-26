@@ -1,3 +1,4 @@
+require('dotenv').config();
 var should = require('should');
 
 describe('Algolia Analytics', function () {
@@ -17,9 +18,7 @@ describe('Algolia Analytics', function () {
         console.log(body);
       }
       success.should.eql(true);
-      should.exist(body.searchCount);
-      should.exist(body.lastSearchAt);
-      should.exist(body.topSearches);
+      should.exist(body.searches);
       done();
     });
   });
@@ -30,35 +29,7 @@ describe('Algolia Analytics', function () {
         console.log(body);
       }
       success.should.eql(true);
-      should.exist(body.searchCount);
-      should.exist(body.lastSearchAt);
-      should.exist(body.topSearchesNoResuls);
-      done();
-    });
-  });
-
-  it('should be able to bench no results searches', function (done) {
-    client.benchNoResults(process.env.ALGOLIA_INDEX, process.env.ALGOLIA_INDEX, {size: 100}, function(success, report) {
-      if (success === false) {
-        console.log(report);
-      }
-      success.should.eql(true);
-      should.exist(report.score);
-      should.exist(report.searches);
-      console.log(report);
-      done();
-    });
-  });
-
-  it('should be able to bench no results searches', function (done) {
-    client.benchPopularSearches(process.env.ALGOLIA_INDEX, process.env.ALGOLIA_INDEX, {size: 100}, function(success, report) {
-      if (success === false) {
-        console.log(report);
-      }
-      success.should.eql(true);
-      should.exist(report.score);
-      should.exist(report.searches);
-      console.log(report);
+      should.exist(body.searches);
       done();
     });
   });
